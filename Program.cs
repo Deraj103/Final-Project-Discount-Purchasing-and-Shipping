@@ -24,8 +24,11 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             int[,] marketingTiers =
             { // cart discount is 10%. Cart discount is defined as everything within the cart will receive a 10% discount
                 { 20, 10, 5 }, // average products
+                { 50, 30, 15 }, // number of average products
                 { 12, 8, 3 }, // expensive products
-                { 20, 10, 5 } // cheap products
+                { 20, 10, 5 }, // number of expensive products
+                { 20, 10, 5 }, // cheap products
+                { 150, 100, 50, } // number of cheap products
             };
             // zone shipping tier information array
             int[] shippingTiers = new int[4] { /*distance > */ 1000, /*distance > */ 500, /*distance > */ 100, /*distance <*/ 100 };
@@ -35,12 +38,15 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
 
             foreach (Marketing item in itemArray)
             {
+                int row = 0;
                 int column = 0;
                 WriteLine($"{item.ToString()}");
                 WriteLine("Discount options:");
                 //itemArray[row].marketingDiscount(row);
-                WriteLine($"\t{Item.getQuantity()} at {marketingTiers[column, 0]:N}%, 30 at {marketingTiers[column, 1]:N}%, 15 at {marketingTiers[column, 2]:N}%");
-                column++;
+                WriteLine($"\t{marketingTiers[row+1, 0]} at {marketingTiers[row, 0]:N}%, {marketingTiers[row+1, 1]} " +
+                    $"at {marketingTiers[row, 1]:N}%, {marketingTiers[row+1, 2]} at {marketingTiers[row, 2]:N}%");
+                row++;
+                column += 2;
             }
 
             WriteLine("\nPress any key to continue...");
