@@ -7,21 +7,25 @@ using static System.Console;
 
 namespace Final_Project_Discount_Purchasing_and_Shipping
 {
-    abstract class Item
+    public class Item
     {
         string id, name;
-        double price;
+        decimal price;
         int quantity;
 
-        public Item(string id, string name, double price, int quantity)
+        public Item(string id, string name, decimal price, int quantity)
         {
             this.id = id;
             this.name = name;
             this.price = price;
             this.quantity = quantity;
         }
-        // interface methods-
-        public abstract void marketingDiscount();
-        public abstract void shippingDiscount();
+        // getter
+        public int getQuantity() { return quantity; }
+        // ToString method
+        public override string ToString()
+        {
+            return $"{id} {name}: cost {price:C} quantity {quantity}";
+        }
     }
 }
