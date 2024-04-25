@@ -9,18 +9,25 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
 {
     internal class Marketing : Item, ICostInterface
     {
-        decimal discount;
+        decimal cartDiscount;
         // constructor
-        public Marketing(string id, string name, decimal price, int quantity, decimal discount)
-            : base (id, name, price, quantity)
+        public Marketing(string id, string name, decimal price, int quantity, int tier1, int tier2, int tier3, 
+            int volume1, int volume2, int volume3, int cartDiscount)
+            : base (id, name, price, quantity, tier1, tier2, tier3, volume1, volume2, volume3)
         {
-            this.discount = discount;
+            this.cartDiscount = cartDiscount;
         }
         // interface methods
-        public string marketingDiscount(int row)
+        public void marketingDiscount()
         {
-            //return $"\t50 at {marketingTiers[row,0]:N}%, 30 at {marketingTiers[row, 1]:N}%, 15 at {marketingTiers[row, 2]:N}%";
-            return "test";
+            decimal totalCost = getQuantity() * getPrice();
+            //decimal discountCalc = marketingDiscountArray[0, 0] / 100;
+            //totalCost = totalCost * discountCalc;
+            //if (quantity > 50)
+            //{
+            //    int discount = MarketingDiscount[0,0];
+            //}
+            //return totalCost;
         }
         public void shippingDiscount()
         {

@@ -10,7 +10,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     interface ICostInterface
     {
         // interface methods
-        string marketingDiscount(int row);
+        void marketingDiscount();
         void shippingDiscount();
     }
 }
