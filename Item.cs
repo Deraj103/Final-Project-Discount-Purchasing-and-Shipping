@@ -10,10 +10,10 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     public class Item
     {
         string id, name;
-        double price;
+        decimal price;
         int quantity, tier1, tier2, tier3, volume1, volume2, volume3;
 
-        public Item(string id, string name, double price, int quantity, int tier1, int tier2, 
+        public Item(string id, string name, decimal price, int quantity, int tier1, int tier2, 
             int tier3, int volume1, int volume2, int volume3)
         {
             this.id = id;
@@ -29,7 +29,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         }
         // getter
         public int getQuantity() { return quantity; }
-        public double getPrice() { return price; }
+        public decimal getPrice() { return price; }
         public int getTier1() { return tier1; }
         public int getTier2() { return tier2; }
         public int getTier3() { return tier3; }

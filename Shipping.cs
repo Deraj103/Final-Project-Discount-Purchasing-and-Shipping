@@ -11,7 +11,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     {
         int flatRate;
         //contructor
-        public Shipping(string id, string name, double price, int quantity, int tier1, int tier2, 
+        public Shipping(string id, string name, decimal price, int quantity, int tier1, int tier2, 
             int tier3, int volume1, int volume2, int volume3, int distance)
             : base (id, name, price, quantity, tier1, tier2, tier3, volume1, volume2, volume3)
         {
@@ -24,9 +24,9 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         }
         public void shippingDiscount()
         {
-            double volumeDiscount;
-            double appliedDiscount;
-            double noDiscount = getQuantity() * getPrice();
+            decimal volumeDiscount;
+            decimal appliedDiscount;
+            decimal noDiscount = getQuantity() * getPrice();
             WriteLine($"Cost with no discount: {noDiscount:C}");
             // tier calculation
             if (getQuantity() > getVolume1())
@@ -58,10 +58,10 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 WriteLine("Not enough volume was purchased. No discount.");
             }
             // whole cart discount
-            cartDiscount = noDiscount * 0.1;
-            WriteLine($"Whole cart discount: {cartDiscount:C}");
-            cartDiscount = noDiscount - cartDiscount;
-            WriteLine($"Cost after cart discount: {cartDiscount:C}\n");
+            //cartDiscount = noDiscount * 0.1;
+            //WriteLine($"Whole cart discount: {cartDiscount:C}");
+            //cartDiscount = noDiscount - cartDiscount;
+            //WriteLine($"Cost after cart discount: {cartDiscount:C}\n");
         }
     }
 }
