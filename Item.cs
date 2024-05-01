@@ -29,6 +29,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         }
         // getter
         public int getQuantity() { return quantity; }
+        public string getName() { return name; }
         public decimal getPrice() { return price; }
         public int getTier1() { return tier1; }
         public int getTier2() { return tier2; }
@@ -39,7 +40,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         // ToString method
         public override string ToString()
         {
-            return $"{id} {name}: cost {price:C}, quantity {quantity}";
+            return $"{id} {name}:";
         }
     }
 }
