@@ -37,32 +37,52 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                       $"{getVolume3()} mi at {getTier3():C}");
             // tier calculation
             // price = miles, quantity = boxes
-            if (getQuantity() > getVolume1())
+            if (getPrice() > getVolume1())
             {
                 zoneRate = getTier1();
-                zoneRateShipCost = zoneRateShipCost * getQuantity();
+                zoneRateShipCost = zoneRate * getQuantity();
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
                 WriteLine($"Flat rate cost: {flatRate:C}\n");
                 // calculations for summary report
-                //straightCost = straightCost + noDiscount;
-                //totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
-                //totalCartDiscount = totalCartDiscount + flatRate;
+                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
+                totalFlatRateCost = totalFlatRateCost + flatRate;
 
             }
             // price = miles, quantity = boxes
-            else if (getQuantity() > getVolume2())
+            else if (getPrice() > getVolume2())
             {
-
+                zoneRate = getTier2();
+                zoneRateShipCost = zoneRate * getQuantity();
+                flatRate = getQuantity() * flatRate;
+                WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
+                WriteLine($"Flat rate cost: {flatRate:C}\n");
+                // calculations for summary report
+                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
+                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
             // price = miles, quantity = boxes
-            else if (getQuantity() > getVolume3())
+            else if (getPrice() > getVolume3())
             {
-
+                zoneRate = getTier3();
+                zoneRateShipCost = zoneRate * getQuantity();
+                flatRate = getQuantity() * flatRate;
+                WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
+                WriteLine($"Flat rate cost: {flatRate:C}\n");
+                // calculations for summary report
+                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
+                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
-            else
-            {
-                WriteLine("Not enough volume was purchased. No discount.");
+            else // if distance < 100 mi = $10/box
+            { 
+                zoneRate = 10;
+                zoneRateShipCost = zoneRate * getQuantity();
+                flatRate = getQuantity() * flatRate;
+                WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
+                WriteLine($"Flat rate cost: {flatRate:C}\n");
+                // calculations for summary report
+                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
+                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
         }
         // whole cart discount
@@ -70,7 +90,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         {
             WriteLine("Part B Summary:");
             WriteLine($"Zone Shipping Costs: {totalZoneRateCost:C}");
-            WriteLine($"Flat Rate Cost: {totalFlatRateCost:C}\n");
+            WriteLine($"     Flat Rate Cost: {totalFlatRateCost:C}\n");
         }
     }
 }

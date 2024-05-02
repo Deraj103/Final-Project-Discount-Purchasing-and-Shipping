@@ -12,7 +12,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     internal class Marketing : Item, ICostInterface
     {
         decimal cartDiscount;
-        decimal wholeCartDiscount;
+        decimal cartDiscountRate;
         static decimal totalCartDiscount;
         static decimal straightCost;
         static decimal totalVolumeDiscount;
@@ -43,8 +43,8 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             {
                 volumeDiscount = (decimal)getTier1() / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
-                wholeCartDiscount = noDiscount * 0.1m;
-                cartDiscount = noDiscount - wholeCartDiscount;
+                cartDiscountRate = noDiscount * 0.1m;
+                cartDiscount = noDiscount - cartDiscountRate;
                 WriteLine($"Volume rate: {getTier1():N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
@@ -58,8 +58,8 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             {
                 volumeDiscount = (decimal)getTier2() / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
-                wholeCartDiscount = noDiscount * 0.1m;
-                cartDiscount = noDiscount - wholeCartDiscount;
+                cartDiscountRate = noDiscount * 0.1m;
+                cartDiscount = noDiscount - cartDiscountRate;
                 WriteLine($"Volume rate: {getTier2():N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
@@ -72,8 +72,8 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             {
                 volumeDiscount = (decimal)getTier3() / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
-                wholeCartDiscount = noDiscount * 0.1m;
-                cartDiscount = noDiscount - wholeCartDiscount;
+                cartDiscountRate = noDiscount * 0.1m;
+                cartDiscount = noDiscount - cartDiscountRate;
                 WriteLine($"Volume rate: {getTier3():N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
@@ -82,20 +82,29 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
                 totalCartDiscount = totalCartDiscount + cartDiscount;
             }
-            else
+            else // if volume < 15(coffee mugs/magnets) or 5(toys) or 50(note cubes) no discount
             {
-                WriteLine("Not enough volume was purchased. No discount.");
+                volumeDiscount = noDiscount;
+                cartDiscountRate = noDiscount * 0.1m;
+                cartDiscount = noDiscount - cartDiscountRate;
+                WriteLine($"Volume rate: {0:N} %, discount: {0:C}");
+                afterAppliedDiscount = noDiscount - volumeDiscount;
+                WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
+                // calculations for summary report
+                straightCost = straightCost + noDiscount;
+                totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
+                totalCartDiscount = totalCartDiscount + cartDiscount;
             }
-            WriteLine($"Whole cart discount: {wholeCartDiscount:C}");
+            WriteLine($"Whole cart discount: {cartDiscountRate:C}");
             WriteLine($"Cost after cart discount: {cartDiscount:C}\n");
         }
         // whole cart discount
         public void summaryMethod()
         {
             WriteLine("Part A Summary:");
-            WriteLine($"Straight Cost: {straightCost:C}");
-            WriteLine($"Volume Discount: {totalVolumeDiscount:C}");
-            WriteLine($"Cart Discount: {totalCartDiscount:C}\n");
+            WriteLine($"   Straight Cost: {straightCost:C}");
+            WriteLine($"Volume Discounts: {totalVolumeDiscount:C}");
+            WriteLine($"   Cart Discount: {totalCartDiscount:C}\n");
         }
     }
 }
