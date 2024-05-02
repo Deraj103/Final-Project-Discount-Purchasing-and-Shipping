@@ -7,40 +7,48 @@ using static System.Console;
 
 namespace Final_Project_Discount_Purchasing_and_Shipping
 {
-    public class Item
+    public abstract class Item : ICostInterface
     {
         string id, name;
         decimal price;
-        int quantity, tier1, tier2, tier3, volume1, volume2, volume3;
+        int quantity, tier1, tier2, tier3, rate1, rate2, rate3;
+        public int[] tiers = new int[3];
+        public int[] rates = new int[3];
 
         public Item(string id, string name, decimal price, int quantity, int tier1, int tier2, 
-            int tier3, int volume1, int volume2, int volume3)
+            int tier3, int rate1, int rate2, int rate3)
         {
             this.id = id;
             this.name = name;
             this.price = price;
             this.quantity = quantity;
-            this.tier1 = tier1;
-            this.tier2 = tier2;
-            this.tier3 = tier3;
-            this.volume1 = volume1;
-            this.volume2 = volume2;
-            this.volume3 = volume3;
+            tiers[0] = tier1;
+            tiers[1] = tier2;
+            tiers[2] = tier3;
+            rates[0] = rate1;
+            rates[1] = rate2;
+            rates[2] = rate3;
         }
         // getter
+
+        // put tiers and rates into an array within the item class
+
         public int getQuantity() { return quantity; }
         public string getName() { return name; }
         public decimal getPrice() { return price; }
-        public int getTier1() { return tier1; }
-        public int getTier2() { return tier2; }
-        public int getTier3() { return tier3; }
-        public int getVolume1() { return volume1; }
-        public int getVolume2() { return volume2; }
-        public int getVolume3() { return volume3; }
+        //public int getTier1() { return tier1; }
+        //public int getTier2() { return tier2; }
+        //public int getTier3() { return tier3; }
+        //public int getVolume1() { return volume1; }
+        //public int getVolume2() { return volume2; }
+        //public int getVolume3() { return volume3; }
         // ToString method
         public override string ToString()
         {
             return $"{id} {name}:";
         }
+        // interface methods
+        public abstract void discountMethod();
+        public abstract void summaryMethod();
     }
 }

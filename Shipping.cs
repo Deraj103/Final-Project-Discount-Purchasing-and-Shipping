@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace Final_Project_Discount_Purchasing_and_Shipping
 {
-    internal class Shipping : Item, ICostInterface
+    internal class Shipping : Item
     {
         static decimal totalZoneRateCost;
         static decimal totalFlatRateCost;
@@ -19,8 +19,8 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         //contructor
         // price = miles, quantity = boxes
         public Shipping(string id, string stateName, decimal miles, int boxQuantity, int tier1, int tier2, 
-            int tier3, int volume1, int volume2, int volume3, decimal flatRate)
-            : base (id, stateName, miles, boxQuantity, tier1, tier2, tier3, volume1, volume2, volume3)
+            int tier3, int rate1, int rate2, int rate3, decimal flatRate)
+            : base (id, stateName, miles, boxQuantity, tier1, tier2, tier3, rate1, rate2, rate3)
         {
             this.flatRate = flatRate;
         }
@@ -30,16 +30,16 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             return $"{base.ToString()} {getQuantity()} boxes, distance {getPrice()} miles";
         }
         // interface methods
-        public void discountMethod()
+        public override void discountMethod()
         {
             WriteLine("Zone Rates:");
-            WriteLine($"\t{getVolume1()} mi at {getTier1():C}, {getVolume2()} mi at {getTier2():C}, " +
-                      $"{getVolume3()} mi at {getTier3():C}");
+            WriteLine($"\t{rates[0]} mi at {tiers[0]:C}, {rates[1]} mi at {tiers[0]:C}, " +
+                      $"{rates[2]} mi at {tiers[0]:C}");
             // tier calculation
             // price = miles, quantity = boxes
-            if (getPrice() > getVolume1())
+            if (getPrice() > rates[0])
             {
-                zoneRate = getTier1();
+                zoneRate = tiers[0];
                 zoneRateShipCost = zoneRate * getQuantity();
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
@@ -50,9 +50,9 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
 
             }
             // price = miles, quantity = boxes
-            else if (getPrice() > getVolume2())
+            else if (getPrice() > rates[1])
             {
-                zoneRate = getTier2();
+                zoneRate = tiers[1];
                 zoneRateShipCost = zoneRate * getQuantity();
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
@@ -62,9 +62,9 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 totalFlatRateCost = totalFlatRateCost + flatRate;
             }
             // price = miles, quantity = boxes
-            else if (getPrice() > getVolume3())
+            else if (getPrice() > rates[2])
             {
-                zoneRate = getTier3();
+                zoneRate = tiers[2];
                 zoneRateShipCost = zoneRate * getQuantity();
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
@@ -86,7 +86,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             }
         }
         // whole cart discount
-        public void summaryMethod()
+        public override void summaryMethod()
         {
             WriteLine("Part B Summary:");
             WriteLine($"Zone Shipping Costs: {totalZoneRateCost:C}");

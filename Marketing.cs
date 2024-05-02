@@ -9,7 +9,7 @@ using static System.Console;
 
 namespace Final_Project_Discount_Purchasing_and_Shipping
 {
-    internal class Marketing : Item, ICostInterface
+    internal class Marketing : Item
     {
         decimal cartDiscount;
         decimal cartDiscountRate;
@@ -20,8 +20,8 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         decimal afterAppliedDiscount;
         // constructor
         public Marketing(string id, string name, decimal price, int quantity, int tier1, int tier2, int tier3,
-            int volume1, int volume2, int volume3, decimal cartDiscount)
-            : base(id, name, price, quantity, tier1, tier2, tier3, volume1, volume2, volume3)
+            int rate1, int rate2, int rate3, decimal cartDiscount)
+            : base(id, name, price, quantity, tier1, tier2, tier3, rate1, rate2, rate3)
         {
             this.cartDiscount = cartDiscount;
         }
@@ -31,21 +31,21 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             return $"{base.ToString()} cost {getPrice():C}, quantity {getQuantity()}";
         }
         // interface methods
-        public void discountMethod()
+        public override void discountMethod()
         {
             decimal noDiscount = getQuantity() * getPrice();
             WriteLine("Discount options:");
-            WriteLine($"\t{getVolume1()} at {getTier1():N} %, {getVolume2()} at {getTier2():N} %, " +
-                      $"{getVolume3()} at {getTier3():N} %");
+            WriteLine($"\t{rates[0]} at {tiers[0]:N} %, {rates[1]} at {tiers[1]:N} %, " +
+                      $"{rates[2]} at {tiers[2]:N} %");
             WriteLine($"Cost with no discount: {noDiscount:C}");
             // tier calculation
-            if (getQuantity() > getVolume1())
+            if (getQuantity() > rates[0])
             {
-                volumeDiscount = (decimal)getTier1() / 100;
+                volumeDiscount = (decimal)tiers[0] / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
                 cartDiscountRate = noDiscount * 0.1m;
                 cartDiscount = noDiscount - cartDiscountRate;
-                WriteLine($"Volume rate: {getTier1():N} %, discount: {volumeDiscount:C}");
+                WriteLine($"Volume rate: {tiers[0]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
                 // calculations for summary report
@@ -54,13 +54,13 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 totalCartDiscount = totalCartDiscount + cartDiscount;
 
             }
-            else if (getQuantity() > getVolume2())
+            else if (getQuantity() > rates[1])
             {
-                volumeDiscount = (decimal)getTier2() / 100;
+                volumeDiscount = (decimal)tiers[1] / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
                 cartDiscountRate = noDiscount * 0.1m;
                 cartDiscount = noDiscount - cartDiscountRate;
-                WriteLine($"Volume rate: {getTier2():N} %, discount: {volumeDiscount:C}");
+                WriteLine($"Volume rate: {tiers[1]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
                 // calculations for summary report
@@ -68,13 +68,13 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
                 totalCartDiscount = totalCartDiscount + cartDiscount;
             }
-            else if (getQuantity() > getVolume3())
+            else if (getQuantity() > rates[2])
             {
-                volumeDiscount = (decimal)getTier3() / 100;
+                volumeDiscount = (decimal)tiers[2] / 100;
                 volumeDiscount = volumeDiscount * noDiscount;
                 cartDiscountRate = noDiscount * 0.1m;
                 cartDiscount = noDiscount - cartDiscountRate;
-                WriteLine($"Volume rate: {getTier3():N} %, discount: {volumeDiscount:C}");
+                WriteLine($"Volume rate: {tiers[2]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
                 // calculations for summary report
@@ -99,7 +99,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             WriteLine($"Cost after cart discount: {cartDiscount:C}\n");
         }
         // whole cart discount
-        public void summaryMethod()
+        public override void summaryMethod()
         {
             WriteLine("Part A Summary:");
             WriteLine($"   Straight Cost: {straightCost:C}");
