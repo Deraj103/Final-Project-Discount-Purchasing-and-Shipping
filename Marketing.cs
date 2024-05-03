@@ -48,11 +48,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 WriteLine($"Volume rate: {tiers[0]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
-                // calculations for summary report
-                straightCost = straightCost + noDiscount;
-                totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
-                totalCartDiscount = totalCartDiscount + cartDiscount;
-
             }
             else if (getQuantity() > rates[1])
             {
@@ -63,10 +58,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 WriteLine($"Volume rate: {tiers[1]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
-                // calculations for summary report
-                straightCost = straightCost + noDiscount;
-                totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
-                totalCartDiscount = totalCartDiscount + cartDiscount;
             }
             else if (getQuantity() > rates[2])
             {
@@ -77,10 +68,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 WriteLine($"Volume rate: {tiers[2]:N} %, discount: {volumeDiscount:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
-                // calculations for summary report
-                straightCost = straightCost + noDiscount;
-                totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
-                totalCartDiscount = totalCartDiscount + cartDiscount;
             }
             else // if volume < 15(coffee mugs/magnets) or 5(toys) or 50(note cubes) no discount
             {
@@ -90,11 +77,11 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 WriteLine($"Volume rate: {0:N} %, discount: {0:C}");
                 afterAppliedDiscount = noDiscount - volumeDiscount;
                 WriteLine($"Cost after Volume discount: {afterAppliedDiscount:C}");
-                // calculations for summary report
-                straightCost = straightCost + noDiscount;
-                totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
-                totalCartDiscount = totalCartDiscount + cartDiscount;
             }
+            // calculations for summary report
+            straightCost = straightCost + noDiscount;
+            totalVolumeDiscount = totalVolumeDiscount + afterAppliedDiscount;
+            totalCartDiscount = totalCartDiscount + cartDiscount;
             WriteLine($"Whole cart discount: {cartDiscountRate:C}");
             WriteLine($"Cost after cart discount: {cartDiscount:C}\n");
         }

@@ -20,9 +20,9 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
         float d1, d2, d3, weight;
         //contructor
         // price = miles, quantity = boxes
-        public Shipping(string id, string stateName, decimal miles, int boxQuantity, int tier1, int tier2, 
+        public Shipping(string id, string stateName, decimal miles, int boxQuantity, int tier1, int tier2,
             int tier3, int rate1, int rate2, int rate3, decimal flatRate, float d1, float d2, float d3, float weight)
-            : base (id, stateName, miles, boxQuantity, tier1, tier2, tier3, rate1, rate2, rate3)
+            : base(id, stateName, miles, boxQuantity, tier1, tier2, tier3, rate1, rate2, rate3)
         {
             this.flatRate = flatRate;
             this.d1 = d1;
@@ -51,10 +51,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
                 WriteLine($"Flat rate cost: {flatRate:C}\n");
-                // calculations for summary report
-                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
-                totalFlatRateCost = totalFlatRateCost + flatRate;
-
             }
             // price = miles, quantity = boxes
             else if (getPrice() > rates[1])
@@ -64,9 +60,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
                 WriteLine($"Flat rate cost: {flatRate:C}\n");
-                // calculations for summary report
-                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
-                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
             // price = miles, quantity = boxes
             else if (getPrice() > rates[2])
@@ -76,21 +69,18 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
                 WriteLine($"Flat rate cost: {flatRate:C}\n");
-                // calculations for summary report
-                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
-                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
             else // if distance < 100 mi = $10/box
-            { 
+            {
                 zoneRate = 10;
                 zoneRateShipCost = zoneRate * getQuantity();
                 flatRate = getQuantity() * flatRate;
                 WriteLine($"Zone rate: {zoneRate:C}, ship cost: {zoneRateShipCost:C}");
                 WriteLine($"Flat rate cost: {flatRate:C}\n");
-                // calculations for summary report
-                totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
-                totalFlatRateCost = totalFlatRateCost + flatRate;
             }
+            // calculations for summary report
+            totalZoneRateCost = totalZoneRateCost + zoneRateShipCost;
+            totalFlatRateCost = totalFlatRateCost + flatRate;
         }
         // whole cart discount
         public override void summaryMethod()

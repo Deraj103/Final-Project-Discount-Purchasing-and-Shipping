@@ -11,7 +11,7 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     {
         string id, name;
         decimal price;
-        int quantity, tier1, tier2, tier3, rate1, rate2, rate3;
+        int quantity;
         public int[] tiers = new int[3];
         public int[] rates = new int[3];
 
