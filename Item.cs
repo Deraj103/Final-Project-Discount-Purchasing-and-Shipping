@@ -29,19 +29,9 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             rates[1] = rate2;
             rates[2] = rate3;
         }
-        // getter
-
-        // put tiers and rates into an array within the item class
-
         public int getQuantity() { return quantity; }
         public string getName() { return name; }
         public decimal getPrice() { return price; }
-        //public int getTier1() { return tier1; }
-        //public int getTier2() { return tier2; }
-        //public int getTier3() { return tier3; }
-        //public int getVolume1() { return volume1; }
-        //public int getVolume2() { return volume2; }
-        //public int getVolume3() { return volume3; }
         // ToString method
         public override string ToString()
         {

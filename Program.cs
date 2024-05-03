@@ -15,8 +15,6 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
     {
         static void Main(string[] args)
         {
-            int counter = 0;
-
             WriteLine("Final Console Project Discount Purchasing and Shipping by Jared Tims\n");
 
             ArrayList marketingArray = new ArrayList();
@@ -25,58 +23,35 @@ namespace Final_Project_Discount_Purchasing_and_Shipping
             marketingArray.Add(new Marketing("P547", "stuffed bear", 11.99m, 30, 12, 8, 3, 20, 10, 5, 10));
             marketingArray.Add(new Marketing("P879", "note cube", 2.50m, 100, 20, 10, 5, 150, 100, 50, 10));
             ArrayList shippingArray = new ArrayList();
-            shippingArray.Add(new Shipping("S678", "Miami FL", 2000, 10, 50, 35, 20, 1000, 500, 100, 35m));
-            shippingArray.Add(new Shipping("S449", "Chicago IL", 800, 25, 50, 35, 20, 1000, 500, 100, 35m));
-            shippingArray.Add(new Shipping("S721", "Denver CO", 150, 30, 50, 35, 20, 1000, 500, 100, 35m));
-            shippingArray.Add(new Shipping("S678", "SLC UT", 30, 50, 50, 35, 20, 1000, 500, 100, 35m));
+            shippingArray.Add(new Shipping("S678", "Miami FL", 2000, 10, 50, 35, 20, 1000, 500, 100, 35m, 11.5f, 8.5f, 4f, 5.2f));
+            shippingArray.Add(new Shipping("S449", "Chicago IL", 800, 25, 50, 35, 20, 1000, 500, 100, 35m, 5f, 5f, 5f, 12.3f));
+            shippingArray.Add(new Shipping("S721", "Denver CO", 150, 30, 50, 35, 20, 1000, 500, 100, 35m, 6.5f, 6.5f, 3f, 2.5f));
+            shippingArray.Add(new Shipping("S678", "SLC UT", 30, 50, 50, 35, 20, 1000, 500, 100, 35m, 14f, 8f, 1f, 1.5f));
 
             WriteLine("Part A: Purchasing Products\n");
-            foreach (Item item in marketingArray)
+            for (int i = 0; i < marketingArray.Count; i++)
             {
                 // instantiates the Marketing class object to enable access to methods and variables within
-                Marketing temp = (Marketing)item;
-                WriteLine($"{item.ToString()}");
+                Marketing temp = (Marketing)marketingArray[i];
+                WriteLine($"{temp.ToString()}");
                 temp.discountMethod();
-                counter++;
-                if (counter == marketingArray.Count)
+                if (i + 1 == marketingArray.Count)
                 {
                     temp.summaryMethod();
                 }
             }
-            // reset counter
-            counter = 0;
             WriteLine("Part B: Shipping\n");
-            foreach (Item item in shippingArray)
+            for (int i = 0; i < shippingArray.Count; i++)
             {
                 // instantiates the Marketing class object to enable access to methods and variables within
-
-                // put shipping dimensions into the shipping objects
-                Shipping temp = (Shipping)item;
-                WriteLine($"{item.ToString()}");
-                if (item.getName() == "Miami FL")
-                {
-                    WriteLine("Size: 11.5 x 8.5 x 4, weight: 5.2");
-                }
-                else if (item.getName() == "Chicago IL")
-                {
-                    WriteLine("Size: 5 x 5 x 5, weight: 12.3");
-                }
-                else if (item.getName() == "Denver CO")
-                {
-                    WriteLine("Size: 6.5 x 6.5 x 3, weight: 2.5");
-                }
-                else if (item.getName() == "SLC UT")
-                {
-                    WriteLine("Size: 14 x 8 x 1, weight: 1.5");
-                }
+                Shipping temp = (Shipping)shippingArray[i];
+                WriteLine($"{temp.ToString()}");
                 temp.discountMethod();
-                counter++;
-                if (counter == shippingArray.Count)
+                if (i + 1 == shippingArray.Count)
                 {
                     temp.summaryMethod();
                 }
             }
-
             WriteLine("Press any key to continue...");
             ReadKey();
         }
